@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
+	import { page } from '$app/state'
 
 	let { form } = $props()
+
+	const code = page.url.searchParams.get('code')
 
 	let copied = $state(false)
 
@@ -26,6 +29,10 @@
 <header>
 	<h1>ShortL</h1>
 </header>
+
+{#if code === 'delete' && !form}
+	<p>The Short URL has been deleted.</p>
+{/if}
 
 <main>
 	<section>

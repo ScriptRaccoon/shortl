@@ -111,6 +111,6 @@ export const actions: Actions = {
 			return fail(500, { error: 'Database error' })
 		}
 
-		redirect(303, '/')
+		redirect(303, '/?code=delete')
 	}
 }
