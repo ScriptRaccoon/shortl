@@ -4,6 +4,7 @@
 	let { form } = $props()
 
 	let deletion_confirmed = $state(false)
+	let show_password = $state(false)
 </script>
 
 <svelte:head>
@@ -49,7 +50,18 @@
 					Number of visits: <span class="value">{form.visits.length}</span>
 				</li>
 				<li>
-					Password: <span class="value">{form.password}</span>
+					Password: <span class="value">
+						{#if show_password}
+							{form.password}
+						{:else}
+							<button
+								class="small"
+								onclick={() => {
+									show_password = true
+								}}>Reveal</button
+							>
+						{/if}
+					</span>
 				</li>
 			</ul>
 		</sectionc>

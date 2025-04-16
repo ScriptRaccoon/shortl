@@ -154,3 +154,7 @@ button.fullwidth {
 		width: 100%;
 	}
 }
+
+button.small {
+	padding: 0rem 0.5rem;
+}
