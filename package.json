@@ -31,9 +31,11 @@
 		]
 	},
 	"dependencies": {
+		"@fortawesome/free-solid-svg-icons": "^6.7.2",
 		"@libsql/client": "^0.15.4",
 		"bcryptjs": "^3.0.2",
 		"nanoid": "^5.1.5",
+		"svelte-fa": "^4.0.3",
 		"zod": "^3.24.2"
 	}
 }
