@@ -20,25 +20,46 @@
 			<h2>Login</h2>
 
 			<form method="POST" action="?/login" use:enhance>
-				<label for="password"></label>
+				<label for="password">Password</label>
 				<input type="password" name="password" id="password" required />
-				<button type="submit">Login</button>
+				<button class="fullwidth" type="submit">Login</button>
 			</form>
+
+			{#if form?.error}
+				<p class="error">{form.error}</p>
+			{/if}
 		</section>
 	{:else}
-		<section>
+		<sectionc class="basic">
 			<h2>Basic Information</h2>
 
-			<p>Shortcut: {form.id}</p>
-			<p>URL: {form.url}</p>
-			<p>Created at: {new Date(form.created_at).toLocaleString()}</p>
-			<p>Number of visits: {form.visits.length}</p>
-		</section>
+			<ul>
+				<li>
+					ShortL ID: <span class="value">{form.id}</span>
+				</li>
+				<li>
+					URL: <span class="value">{form.url}</span>
+				</li>
+				<li>
+					Created at: <span class="value">
+						{new Date(form.created_at).toLocaleString()}
+					</span>
+				</li>
+				<li>
+					Number of visits: <span class="value">{form.visits.length}</span>
+				</li>
+				<li>
+					Password: <span class="value">{form.password}</span>
+				</li>
+			</ul>
+		</sectionc>
 
-		{#if form.visits.length}
-			<section>
-				<h2>List of Visits</h2>
+		<section>
+			<h2>List of Visits</h2>
 
+			{#if !form.visits.length}
+				<p>No visits so far</p>
+			{:else}
 				<table>
 					<thead>
 						<tr>
@@ -50,15 +71,15 @@
 					<tbody>
 						{#each form.visits as visit, i}
 							<tr>
-								<td>{i + 1}</td>
+								<td>{form.visits.length - i}</td>
 								<td>{new Date(visit.date).toLocaleString()}</td>
 								<td>{visit.referer}</td>
 							</tr>
 						{/each}
 					</tbody>
 				</table>
-			</section>
-		{/if}
+			{/if}
+		</section>
 
 		<section>
 			<h2>Danger Zone</h2>
@@ -66,7 +87,7 @@
 			<form action="?/delete" method="POST" use:enhance>
 				{#if deletion_confirmed}
 					<button type="submit">Yes, Delete Shortcut</button>
-					<p>Are you sure? This action cannot be undone</p>
+					<p>Are you sure? This action cannot be undone.</p>
 				{:else}
 					<button
 						type="button"
@@ -79,8 +100,29 @@
 			</form>
 		</section>
 	{/if}
-
-	{#if form?.error}
-		<p class="error">{form.error}</p>
-	{/if}
 </main>
+
+<style>
+	.value {
+		font-weight: 500;
+		color: orangered;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 1rem;
+
+		thead {
+			background-color: #eee;
+		}
+
+		th {
+			text-align: left;
+		}
+
+		td {
+			padding-block: 2px;
+		}
+	}
+</style>

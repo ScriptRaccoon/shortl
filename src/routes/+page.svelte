@@ -41,7 +41,9 @@
 				value={form?.url}
 				disabled={!!form?.id}
 			/>
-			<button type="submit" disabled={!!form?.id}>Shorten</button>
+			{#if !form?.id}
+				<button class="fullwidth" type="submit">Shorten</button>
+			{/if}
 		</form>
 
 		{#if form?.error}
@@ -53,7 +55,9 @@
 		<section>
 			<h2>Short URL has been generated</h2>
 
-			<p><code>{form?.short_url}</code></p>
+			<p class="accent">
+				<code>{form?.short_url}</code>
+			</p>
 
 			<button onclick={copy_url}>
 				{#if copied}
@@ -62,16 +66,29 @@
 					Copy URL
 				{/if}
 			</button>
+		</section>
 
-			<p>To maintain the short URL and in particular get analytics for the visits, open</p>
+		<section>
+			<h2>Analytics and more</h2>
+
+			<p>
+				To get analytics for the visits of the short URL and to delete the short URL when it
+				is no longer needed, open
+			</p>
 			<p>
 				<a href={form.short_url_admin}><code>{form.short_url_admin}</code></a>
 			</p>
 			<p>and use the following password:</p>
 			<p>
-				<code>{form.password}</code>
+				<code class="password">{form.password}</code>
 			</p>
 			<p>Please save this password since it will not be shown again.</p>
 		</section>
 	{/if}
 </main>
+
+<style>
+	.password {
+		font-weight: bold;
+	}
+</style>
