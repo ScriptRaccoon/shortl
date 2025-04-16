@@ -31,7 +31,7 @@
 			{/if}
 		</section>
 	{:else}
-		<sectionc class="basic">
+		<section>
 			<h2>Basic Information</h2>
 
 			<ul>
@@ -64,7 +64,7 @@
 					</span>
 				</li>
 			</ul>
-		</sectionc>
+		</section>
 
 		<section>
 			<h2>List of Visits</h2>
@@ -98,15 +98,17 @@
 
 			<form action="?/delete" method="POST" use:enhance>
 				{#if deletion_confirmed}
-					<button type="submit">Yes, Delete Shortcut</button>
+					<button type="submit">Yes, delete short URL</button>
 					<p>Are you sure? This action cannot be undone.</p>
 				{:else}
 					<button
 						type="button"
 						onclick={() => {
 							deletion_confirmed = true
-						}}>Delete Shortcut</button
+						}}
 					>
+						Delete short URL
+					</button>
 				{/if}
 				<input type="hidden" name="password" value={form.password} />
 			</form>

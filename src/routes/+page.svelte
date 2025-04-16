@@ -9,8 +9,7 @@
 	let copied = $state(false)
 
 	async function copy_url() {
-		if (!form?.short_url) return
-		await navigator.clipboard.writeText(form?.short_url)
+		await navigator.clipboard.writeText(form?.short_url ?? '')
 		copied = true
 		setTimeout(() => {
 			copied = false
@@ -31,12 +30,12 @@
 </header>
 
 {#if code === 'delete' && !form}
-	<p>The Short URL has been deleted.</p>
+	<p>The short URL has been deleted.</p>
 {/if}
 
 <main>
 	<section>
-		<h2>Create a Short URL</h2>
+		<h2>Create a short URL</h2>
 		<form method="POST" use:enhance>
 			<label for="url">URL</label>
 			<input
@@ -68,7 +67,7 @@
 
 			<button onclick={copy_url}>
 				{#if copied}
-					Copied!
+					Copied URL!
 				{:else}
 					Copy URL
 				{/if}

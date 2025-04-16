@@ -25,16 +25,16 @@ export const GET: RequestHandler = async (event) => {
 		return error(404, 'Short URL not found')
 	}
 
-	const url = rows[0].url as string
+	const url = rows[0].url
 
 	const referer = event.request.headers.get('referer') || 'direct'
 
-	update_statistics({ id, referer })
+	save_visit({ id, referer })
 
 	redirect(303, url)
 }
 
-async function update_statistics(options: { id: string; referer: string }) {
+async function save_visit(options: { id: string; referer: string }) {
 	const { id, referer } = options
 
 	const sql = `

@@ -35,7 +35,7 @@ export const actions: Actions = {
 		const { success } = await query(sql, { id, url, password_hash })
 
 		if (!success) {
-			return fail(500, { url, error: 'Failed to create shortcut' })
+			return fail(500, { url, error: 'Database error' })
 		}
 
 		const short_url = `${event.url.origin}/${id}`

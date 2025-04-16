@@ -2,6 +2,7 @@
 	import Fa from 'svelte-fa'
 	import { faHome } from '@fortawesome/free-solid-svg-icons'
 	import './app.css'
+
 	let { children } = $props()
 </script>
 
@@ -22,9 +23,9 @@
 		margin-bottom: -1rem;
 		font-size: 1rem;
 		padding-top: 0.25rem;
+	}
 
-		a {
-			color: black;
-		}
+	a {
+		color: black;
 	}
 </style>

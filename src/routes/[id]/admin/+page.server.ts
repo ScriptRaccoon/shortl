@@ -24,13 +24,13 @@ async function get_shortcut(
 	}
 
 	const sql = `
-        SELECT
-            id, url, created_at, password_hash
-        FROM
-            shortcuts
-        WHERE
-            id = :id
-        `
+	SELECT
+		id, url, created_at, password_hash
+	FROM
+		shortcuts
+	WHERE
+		id = :id
+	`
 
 	const { success, rows: shortcuts } = await query<ShortcutEntry>(sql, { id })
 
@@ -60,13 +60,14 @@ export const actions: Actions = {
 		const id = event.params.id
 
 		const shortcut = await get_shortcut(id, password)
+
 		if ('error' in shortcut) {
 			return fail(shortcut.status, { error: shortcut.error })
 		}
 
 		const { url, created_at } = shortcut
 
-		const sql_visits = `
+		const sql = `
         SELECT
             date, referer
         FROM
@@ -77,12 +78,9 @@ export const actions: Actions = {
             date DESC
         `
 
-		const { success: success_visits, rows: visits } = await query<VisitEntry>(
-			sql_visits,
-			{ id }
-		)
+		const { success, rows: visits } = await query<VisitEntry>(sql, { id })
 
-		if (!success_visits) {
+		if (!success) {
 			return fail(500, { error: 'Database error' })
 		}
 
@@ -95,18 +93,19 @@ export const actions: Actions = {
 		const id = event.params.id
 
 		const shortcut = await get_shortcut(event.params.id, password)
+
 		if ('error' in shortcut) {
 			return fail(shortcut.status, { error: shortcut.error })
 		}
 
-		const sql_delete = `
+		const sql = `
         DELETE FROM
             shortcuts
         WHERE
             id = :id
         `
 
-		const { success } = await query(sql_delete, { id })
+		const { success } = await query(sql, { id })
 
 		if (!success) {
 			return fail(500, { error: 'Database error' })
