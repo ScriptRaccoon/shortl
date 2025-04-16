@@ -12,7 +12,9 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check ."
+		"lint": "prettier --check .",
+		"db:seed": "sqlite3 database/main.db < database/seed.sql",
+		"db:shell": "sqlite3 database/main.db"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "^5.0.0",
