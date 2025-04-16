@@ -79,8 +79,8 @@
 			<h2>Analytics and more</h2>
 
 			<p>
-				To get analytics for the visits of the short URL and to delete the short URL when it
-				is no longer needed, open
+				To get analytics for the visits of the short URL and to delete the short
+				URL when it is no longer needed, open
 			</p>
 			<p>
 				<a href={form.short_url_admin}><code>{form.short_url_admin}</code></a>

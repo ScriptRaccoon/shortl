@@ -77,9 +77,10 @@ export const actions: Actions = {
             date DESC
         `
 
-		const { success: success_visits, rows: visits } = await query<VisitEntry>(sql_visits, {
-			id
-		})
+		const { success: success_visits, rows: visits } = await query<VisitEntry>(
+			sql_visits,
+			{ id }
+		)
 
 		if (!success_visits) {
 			return fail(500, { error: 'Database error' })
