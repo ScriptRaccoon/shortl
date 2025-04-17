@@ -1,6 +1,6 @@
 # ShortL
 
-This is a URL shortner made with SvelteKit and SQLite.
+This is a URL shortner made with SvelteKit and SQLite (hosted on Turso).
 
 <https://sshortl.netlify.app>
 
