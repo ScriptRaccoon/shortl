@@ -106,10 +106,10 @@
 	}
 
 	.short_url {
-		color: orangered;
+		color: var(--accent-color);
 	}
 
 	.admin-link {
-		color: royalblue;
+		color: var(--link-color);
 	}
 </style>

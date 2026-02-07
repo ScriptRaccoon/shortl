@@ -11,6 +11,18 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--bg-color: white;
+	--font-color: black;
+	--accent-color: orangered;
+	--link-color: royalblue;
+	--button-bg-color: black;
+	--button-font-color: white;
+	--secondary-bg-color: #eee;
+	--error-color: red;
+	--outline-color: black;
+}
+
 body {
 	font-family:
 		system-ui,
@@ -26,6 +38,8 @@ body {
 		sans-serif;
 	line-height: 1.5;
 	font-size: 1.125rem;
+	background-color: var(--bg-color);
+	color: var(--font-color);
 }
 
 h1,
@@ -65,7 +79,7 @@ section {
 }
 
 .error {
-	color: red;
+	color: var(--error-color);
 	font-weight: 500;
 }
 
@@ -80,17 +94,17 @@ input {
 
 input {
 	padding: 0.25rem;
-	border: 1px solid black;
+	border: 1px solid var(--outline-color);
 	width: 100%;
 
 	&:focus-visible {
-		outline: 1px solid black;
+		outline: 1px solid var(--outline-color);
 	}
 }
 
 button {
-	background: black;
-	color: white;
+	background: var(--button-bg-color);
+	color: var(--button-font-color);
 	padding: 0.25rem 0.5rem;
 	font-size: 1rem;
 	font-weight: 500;
@@ -117,7 +131,7 @@ button {
 }
 
 :is(a, button):focus-visible {
-	outline: 2px solid black;
+	outline: 2px solid var(--outline-color);
 	outline-offset: 2px;
 }
 

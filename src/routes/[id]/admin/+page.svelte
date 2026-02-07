@@ -165,7 +165,7 @@
 <style>
 	.value {
 		font-weight: 500;
-		color: orangered;
+		color: var(--accent-color);
 	}
 
 	table {
@@ -174,7 +174,7 @@
 		font-size: 1rem;
 
 		thead {
-			background-color: #eee;
+			background-color: var(--secondary-bg-color);
 		}
 
 		th {
