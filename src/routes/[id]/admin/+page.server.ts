@@ -19,12 +19,12 @@ async function get_shortcut(id: string, password: string) {
 	}>(sql, [id])
 
 	if (err) return { status: 500, error: 'Database error' }
-	if (!shortcuts.length) return { status: 404, error: 'Short URL not found' }
+	if (!shortcuts.length) return { status: 401, error: 'Invalid credentials' }
 
 	const { url, created_at, password_hash } = shortcuts[0]
 
 	const password_is_correct = await bcrypt.compare(password, password_hash)
-	if (!password_is_correct) return { status: 401, error: 'Incorrect password' }
+	if (!password_is_correct) return { status: 401, error: 'Invalid credentials' }
 
 	return { status: 200, shortcut: { id, url, created_at } }
 }
