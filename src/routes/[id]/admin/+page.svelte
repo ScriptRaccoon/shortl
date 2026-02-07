@@ -117,8 +117,8 @@
 							<tr>
 								<td>{shortcut.visits.length - i}</td>
 								<td>{new Date(visit.date).toLocaleString()}</td>
-								<td>{visit.referer}</td>
-								<td>{visit.country || ''}</td>
+								<td>This is some long referer</td>
+								<td>DE</td>
 							</tr>
 						{/each}
 					</tbody>
@@ -181,8 +181,9 @@
 			text-align: left;
 		}
 
-		td {
-			padding-block: 2px;
+		td,
+		th {
+			padding: 0.1rem 0.5rem;
 		}
 	}
 </style>
