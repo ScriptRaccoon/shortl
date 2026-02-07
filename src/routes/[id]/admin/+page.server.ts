@@ -2,6 +2,7 @@ import { fail, redirect } from '@sveltejs/kit'
 import type { Actions } from './$types'
 import { query } from '$lib/server/db'
 import bcrypt from 'bcryptjs'
+import type { ShortCut } from '$lib/types'
 
 async function get_shortcut(id: string, password: string) {
 	if (!password) return { status: 400, error: 'Password is required' }
@@ -25,7 +26,7 @@ async function get_shortcut(id: string, password: string) {
 	const password_is_correct = await bcrypt.compare(password, password_hash)
 	if (!password_is_correct) return { status: 401, error: 'Incorrect password' }
 
-	return { status: 200, id, url, created_at }
+	return { status: 200, shortcut: { id, url, created_at } }
 }
 
 export const actions: Actions = {
@@ -34,13 +35,15 @@ export const actions: Actions = {
 		const password = form_data.get('password') as string
 		const id = event.params.id
 
-		const shortcut = await get_shortcut(id, password)
+		const {
+			status,
+			error,
+			shortcut: shortcut_meta
+		} = await get_shortcut(id, password)
 
-		if ('error' in shortcut) {
-			return fail(shortcut.status, { error: shortcut.error })
-		}
+		if (!shortcut_meta) return fail(status, { error })
 
-		const { url, created_at } = shortcut
+		const { url, created_at } = shortcut_meta
 
 		const sql = `
         	SELECT date, referer
@@ -57,7 +60,9 @@ export const actions: Actions = {
 
 		const short_url = `${event.url.origin}/${id}`
 
-		return { success: true, id, url, short_url, created_at, visits, password }
+		const shortcut: ShortCut = { id, url, short_url, created_at, visits, password }
+
+		return { shortcut }
 	},
 
 	delete: async (event) => {
@@ -65,11 +70,9 @@ export const actions: Actions = {
 		const password = form_data.get('password') as string
 		const id = event.params.id
 
-		const shortcut = await get_shortcut(event.params.id, password)
+		const { status, error } = await get_shortcut(event.params.id, password)
 
-		if ('error' in shortcut) {
-			return fail(shortcut.status, { error: shortcut.error })
-		}
+		if (error) return fail(status, { error })
 
 		const sql = 'DELETE FROM shortcuts WHERE id = ?'
 

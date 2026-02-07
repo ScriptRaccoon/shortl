@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
+	import type { ShortCut } from '$lib/types'
 
 	let { form } = $props()
 
@@ -15,6 +16,12 @@
 			deletion_confirmed = false
 		}, 5000)
 	}
+
+	let shortcut = $state<null | ShortCut>(null)
+
+	$effect(() => {
+		if (form?.shortcut) shortcut = form.shortcut
+	})
 </script>
 
 <svelte:head>
@@ -26,7 +33,7 @@
 </header>
 
 <main>
-	{#if !form?.success}
+	{#if !shortcut}
 		<section>
 			<h2>Login</h2>
 
@@ -60,26 +67,26 @@
 
 			<ul>
 				<li>
-					ShortL ID: <span class="value">{form.id}</span>
+					ShortL ID: <span class="value">{shortcut.id}</span>
 				</li>
 				<li>
-					URL: <span class="value">{form.url}</span>
+					URL: <span class="value">{shortcut.url}</span>
 				</li>
 				<li>
-					Short URL: <span class="value">{form.short_url}</span>
+					Short URL: <span class="value">{shortcut.short_url}</span>
 				</li>
 				<li>
 					Created at: <span class="value">
-						{new Date(form.created_at).toLocaleString()}
+						{new Date(shortcut.created_at).toLocaleString()}
 					</span>
 				</li>
 				<li>
-					Number of visits: <span class="value">{form.visits.length}</span>
+					Number of visits: <span class="value">{shortcut.visits.length}</span>
 				</li>
 				<li>
 					Password: <span class="value">
 						{#if show_password}
-							{form.password}
+							{shortcut.password}
 						{:else}
 							<button class="small" onclick={() => (show_password = true)}>
 								Reveal
@@ -93,7 +100,7 @@
 		<section>
 			<h2>List of Visits</h2>
 
-			{#if !form.visits.length}
+			{#if !shortcut.visits.length}
 				<p>No visits so far</p>
 			{:else}
 				<table>
@@ -105,9 +112,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						{#each form.visits as visit, i}
+						{#each shortcut.visits as visit, i}
 							<tr>
-								<td>{form.visits.length - i}</td>
+								<td>{shortcut.visits.length - i}</td>
 								<td>{new Date(visit.date).toLocaleString()}</td>
 								<td>{visit.referer}</td>
 							</tr>
@@ -139,11 +146,15 @@
 						Delete short URL
 					</button>
 				{/if}
-				<input type="hidden" name="password" value={form.password} />
+				<input type="hidden" name="password" value={shortcut.password} />
 			</form>
 
 			{#if sending_delete}
 				<p>Please wait ...</p>
+			{/if}
+
+			{#if !sending_delete && form?.error}
+				<p class="error">{form.error}</p>
 			{/if}
 		</section>
 	{/if}
