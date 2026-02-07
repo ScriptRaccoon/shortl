@@ -67,8 +67,8 @@
 			<h2>Analytics and more</h2>
 
 			<p>
-				To get analytics for the visits of the short URL and to delete the short
-				URL when it is no longer needed, open
+				To view analytics for visits to the short URL and to delete the short URL
+				when it is no longer needed, open:
 			</p>
 			<p>
 				<a class="accent" href={form.short_url_admin}>
@@ -82,7 +82,7 @@
 
 			<CopyBtn content={form.password} label="Copy password" />
 
-			<p>Please save this password since it will not be shown again.</p>
+			<p>Please save this password, as it will not be shown again.</p>
 		</section>
 	{/if}
 </main>

@@ -59,11 +59,11 @@
 		</section>
 	{:else}
 		<section>
-			<h2>Basic Information</h2>
+			<h2>Details</h2>
 
 			<ul>
 				<li>
-					ShortL ID: <span class="value">{shortcut.id}</span>
+					ID: <span class="value">{shortcut.id}</span>
 				</li>
 				<li>
 					URL: <span class="value">{shortcut.url}</span>
@@ -94,7 +94,7 @@
 		</section>
 
 		<section>
-			<h2>List of Visits</h2>
+			<h2>Visits</h2>
 
 			{#if !shortcut.visits.length}
 				<p>No visits so far</p>
