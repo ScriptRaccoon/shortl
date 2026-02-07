@@ -14,7 +14,8 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check .",
 		"db:seed": "sqlite3 database/local.db < database/seed.sql",
-		"db:shell": "sqlite3 database/local.db"
+		"db:shell": "sqlite3 database/local.db",
+		"db:cleanup": "sqlite3 database/local.db < database/cleanup.sql"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "^5.0.0",
@@ -34,6 +35,7 @@
 	},
 	"dependencies": {
 		"@libsql/client": "^0.15.4",
+		"@netlify/functions": "^5.1.2",
 		"bcryptjs": "^3.0.2",
 		"lucide-svelte": "^0.563.0",
 		"nanoid": "^5.1.5",
