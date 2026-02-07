@@ -5,14 +5,16 @@ import { query } from '$lib/server/db'
 
 export const GET: RequestHandler = async (event) => {
 	const id = event.params.id
+	const referer = event.request.headers.get('referer') || 'direct'
+	const country = event.request.headers.get('x-country')
 
-	console.info('VISIT:', id)
-	console.info('HEADERS:')
-	console.info(event.request.headers)
+	const sql_url = 'SELECT url FROM shortcuts WHERE id = ?'
 
-	const sql = 'SELECT url FROM shortcuts WHERE id = ?'
+	const sql_visit = `
+		INSERT INTO visits (shortcut_id, referer, country)
+		VALUES (?, ?, ?)`
 
-	const { err, rows } = await query<{ url: string }>(sql, [id])
+	const { err, rows } = await query<{ url: string }>(sql_url, [id])
 
 	if (err) error(500, 'Database error')
 
@@ -20,17 +22,7 @@ export const GET: RequestHandler = async (event) => {
 
 	const { url } = rows[0]
 
-	save_visit(id, event.request.headers)
+	await query(sql_visit, [id, referer, country])
 
 	redirect(303, url)
-}
-
-async function save_visit(id: string, headers: Headers) {
-	const referer = headers.get('referer') || 'direct'
-	const country = headers.get('x-country')
-
-	const sql = `
-		INSERT INTO visits (shortcut_id, referer, country)
-		VALUES (?, ?, ?)`
-	await query(sql, [id, referer, country])
 }
