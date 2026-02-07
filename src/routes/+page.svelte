@@ -1,19 +1,9 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
 	import { page } from '$app/state'
+	import CopyBtn from '$lib/components/CopyBtn.svelte'
 
 	let { form } = $props()
-
-	let copied = $state(false)
-
-	async function copy_url() {
-		if (!form?.short_url) return
-		await navigator.clipboard.writeText(form.short_url)
-		copied = true
-		setTimeout(() => {
-			copied = false
-		}, 2000)
-	}
 
 	let sending = $state(false)
 </script>
@@ -70,13 +60,7 @@
 				<code>{form?.short_url}</code>
 			</p>
 
-			<button onclick={copy_url}>
-				{#if copied}
-					Copied URL!
-				{:else}
-					Copy URL
-				{/if}
-			</button>
+			<CopyBtn content={form?.short_url} label="Copy URL" />
 		</section>
 
 		<section>
@@ -95,6 +79,9 @@
 			<p>
 				<code class="password">{form.password}</code>
 			</p>
+
+			<CopyBtn content={form.password} label="Copy password" />
+
 			<p>Please save this password since it will not be shown again.</p>
 		</section>
 	{/if}
