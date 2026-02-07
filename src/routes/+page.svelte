@@ -91,4 +91,8 @@
 	.password {
 		font-weight: bold;
 	}
+
+	code {
+		word-break: break-all;
+	}
 </style>
