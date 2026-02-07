@@ -30,12 +30,11 @@
 		<form method="POST" use:enhance>
 			<label for="url">URL</label>
 			<input
-				type="text"
+				type="url"
 				name="url"
 				id="url"
-				placeholder="https://..."
 				required
-				value={form?.url}
+				value={form?.url ?? 'https://'}
 				disabled={!!form?.id}
 			/>
 			{#if !form?.id}
