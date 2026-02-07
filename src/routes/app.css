@@ -15,7 +15,6 @@
 	--bg-color: white;
 	--font-color: black;
 	--accent-color: orangered;
-	--link-color: royalblue;
 	--button-bg-color: black;
 	--button-font-color: white;
 	--secondary-bg-color: #eee;
@@ -28,7 +27,6 @@
 		--bg-color: black;
 		--font-color: white;
 		--accent-color: yellow;
-		--link-color: skyblue;
 		--button-bg-color: white;
 		--button-font-color: black;
 		--secondary-bg-color: #333;
@@ -95,6 +93,10 @@ section {
 .error {
 	color: var(--error-color);
 	font-weight: 500;
+}
+
+.accent {
+	color: var(--accent-color);
 }
 
 button,

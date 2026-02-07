@@ -13,7 +13,7 @@
 </header>
 
 {#if page.url.searchParams.get('code') === 'delete' && !form}
-	<p>The short URL has been deleted.</p>
+	<p class="accent">The short URL has been deleted.</p>
 {/if}
 
 <main>
@@ -56,7 +56,7 @@
 		<section>
 			<h2>Short URL has been generated</h2>
 
-			<p class="short_url">
+			<p class="accent">
 				<code>{form?.short_url}</code>
 			</p>
 
@@ -71,9 +71,9 @@
 				URL when it is no longer needed, open
 			</p>
 			<p>
-				<a class="admin-link" href={form.short_url_admin}
-					><code>{form.short_url_admin}</code></a
-				>
+				<a class="accent" href={form.short_url_admin}>
+					<code>{form.short_url_admin}</code>
+				</a>
 			</p>
 			<p>and use the following password:</p>
 			<p>
@@ -90,13 +90,5 @@
 <style>
 	.password {
 		font-weight: bold;
-	}
-
-	.short_url {
-		color: var(--accent-color);
-	}
-
-	.admin-link {
-		color: var(--link-color);
 	}
 </style>
