@@ -23,6 +23,20 @@
 	--outline-color: black;
 }
 
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg-color: black;
+		--font-color: white;
+		--accent-color: yellow;
+		--link-color: skyblue;
+		--button-bg-color: white;
+		--button-font-color: black;
+		--secondary-bg-color: #333;
+		--error-color: orangered;
+		--outline-color: white;
+	}
+}
+
 body {
 	font-family:
 		system-ui,
