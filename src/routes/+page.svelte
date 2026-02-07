@@ -14,6 +14,8 @@
 			copied = false
 		}, 2000)
 	}
+
+	let sending = $state(false)
 </script>
 
 <header>
@@ -27,7 +29,16 @@
 <main>
 	<section>
 		<h2>Create a short URL</h2>
-		<form method="POST" use:enhance>
+		<form
+			method="POST"
+			use:enhance={() => {
+				sending = true
+				return async ({ update }) => {
+					await update()
+					sending = false
+				}
+			}}
+		>
 			<label for="url">URL</label>
 			<input
 				type="url"
@@ -42,7 +53,11 @@
 			{/if}
 		</form>
 
-		{#if form?.error}
+		{#if sending}
+			<p>Please wait ...</p>
+		{/if}
+
+		{#if !sending && form?.error}
 			<p class="error">{form.error}</p>
 		{/if}
 	</section>

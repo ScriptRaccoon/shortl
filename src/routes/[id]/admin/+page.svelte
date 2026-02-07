@@ -5,6 +5,9 @@
 
 	let deletion_confirmed = $state(false)
 	let show_password = $state(false)
+
+	let sending_password = $state(false)
+	let sending_delete = $state(false)
 </script>
 
 <svelte:head>
@@ -20,13 +23,27 @@
 		<section>
 			<h2>Login</h2>
 
-			<form method="POST" action="?/login" use:enhance>
+			<form
+				method="POST"
+				action="?/login"
+				use:enhance={() => {
+					sending_password = true
+					return async ({ update }) => {
+						await update()
+						sending_password = false
+					}
+				}}
+			>
 				<label for="password">Password</label>
 				<input type="password" name="password" id="password" required />
 				<button class="fullwidth" type="submit">Login</button>
 			</form>
 
-			{#if form?.error}
+			{#if sending_password}
+				<p>Please wait ...</p>
+			{/if}
+
+			{#if !sending_password && form?.error}
 				<p class="error">{form.error}</p>
 			{/if}
 		</section>
@@ -96,7 +113,17 @@
 		<section>
 			<h2>Danger Zone</h2>
 
-			<form action="?/delete" method="POST" use:enhance>
+			<form
+				action="?/delete"
+				method="POST"
+				use:enhance={() => {
+					sending_delete = true
+					return async ({ update }) => {
+						await update()
+						sending_delete = false
+					}
+				}}
+			>
 				{#if deletion_confirmed}
 					<button type="submit">Yes, delete short URL</button>
 					<p>Are you sure? This action cannot be undone.</p>
@@ -107,6 +134,10 @@
 				{/if}
 				<input type="hidden" name="password" value={form.password} />
 			</form>
+
+			{#if sending_delete}
+				<p>Please wait ...</p>
+			{/if}
 		</section>
 	{/if}
 </main>
