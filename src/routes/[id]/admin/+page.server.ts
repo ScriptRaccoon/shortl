@@ -46,7 +46,7 @@ export const actions: Actions = {
 		const { url, created_at } = shortcut_meta
 
 		const sql = `
-        	SELECT date, referer
+        	SELECT date, referer, country
     		FROM visits
 			WHERE shortcut_id = ?
         	ORDER BY date DESC`
@@ -54,6 +54,7 @@ export const actions: Actions = {
 		const { err, rows: visits } = await query<{
 			date: string
 			referer: string
+			country: string | null
 		}>(sql, [id])
 
 		if (err) return fail(500, { error: 'Database error' })

@@ -4,5 +4,5 @@ export type ShortCut = {
 	short_url: string
 	created_at: string
 	password: string
-	visits: { date: string; referer: string }[]
+	visits: { date: string; referer: string; country: string | null }[]
 }

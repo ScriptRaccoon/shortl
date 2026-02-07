@@ -10,5 +10,6 @@ CREATE TABLE IF NOT EXISTS visits (
     shortcut_id TEXT NOT NULL,
     date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     referer TEXT NOT NULL,
+    country TEXT,
     FOREIGN KEY (shortcut_id) REFERENCES shortcuts (id) ON DELETE CASCADE
 );
