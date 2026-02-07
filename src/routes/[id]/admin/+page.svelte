@@ -42,6 +42,9 @@
 					URL: <span class="value">{form.url}</span>
 				</li>
 				<li>
+					Short URL: <span class="value">{form.short_url}</span>
+				</li>
+				<li>
 					Created at: <span class="value">
 						{new Date(form.created_at).toLocaleString()}
 					</span>

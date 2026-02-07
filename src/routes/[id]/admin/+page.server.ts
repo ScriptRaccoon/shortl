@@ -55,7 +55,9 @@ export const actions: Actions = {
 
 		if (err) return fail(500, { error: 'Database error' })
 
-		return { success: true, id, url, created_at, visits, password }
+		const short_url = `${event.url.origin}/${id}`
+
+		return { success: true, id, url, short_url, created_at, visits, password }
 	},
 
 	delete: async (event) => {
