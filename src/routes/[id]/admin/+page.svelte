@@ -24,10 +24,6 @@
 	})
 </script>
 
-<svelte:head>
-	<title>ShortL Admin Page</title>
-</svelte:head>
-
 <header>
 	<h1>ShortL Admin Page</h1>
 </header>
