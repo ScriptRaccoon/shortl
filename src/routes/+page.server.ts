@@ -7,36 +7,30 @@ import bcrypt from 'bcryptjs'
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const alphabetnums = `${alphabet}0123456789`
-const get_random_id = customAlphabet(alphabet, 6)
-const get_random_pw = customAlphabet(alphabetnums, 16)
+
+const generate_id = customAlphabet(alphabet, 6)
+const generate_password = customAlphabet(alphabetnums, 16)
 
 export const actions: Actions = {
 	default: async (event) => {
-		const form_data = await event.request.formData()
-		const url = form_data.get('url') as string | null
+		const form = await event.request.formData()
+		const url = form.get('url') as string
 
 		const is_valid_url = z.string().url().safeParse(url).success
 
-		if (!is_valid_url) {
-			return fail(400, { url, error: 'URL is not valid' })
-		}
+		if (!is_valid_url) return fail(400, { url, error: 'URL is not valid' })
 
-		const id = get_random_id()
-		const password = get_random_pw()
+		const id = generate_id()
+		const password = generate_password()
 		const password_hash = await bcrypt.hash(password, 10)
 
 		const sql = `
-        INSERT INTO
-            shortcuts (id, url, password_hash)
-        VALUES
-            (:id, :url, :password_hash)
-        `
+			INSERT INTO shortcuts (id, url, password_hash)
+			VALUES (?,?,?)`
 
-		const { success } = await query(sql, { id, url, password_hash })
+		const { err } = await query(sql, [id, url, password_hash])
 
-		if (!success) {
-			return fail(500, { url, error: 'Database error' })
-		}
+		if (err) return fail(500, { url, error: 'Database error' })
 
 		const short_url = `${event.url.origin}/${id}`
 		const short_url_admin = `${event.url.origin}/${id}/admin`

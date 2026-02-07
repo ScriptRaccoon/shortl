@@ -9,28 +9,13 @@ const db = createClient({
 /**
  * Small wrapper around the `db.execute` function from `@libsql/client` to handle errors.
  */
-export async function query<T = any>(
-	sql: string,
-	params?: Record<string, any>
-): Promise<
-	| {
-			rows: T[]
-			success: true
-			err: null
-	  }
-	| {
-			rows: null
-			success: false
-			err: LibsqlError
-	  }
-> {
+export async function query<T = any>(sql: string, args?: Record<string, any>) {
 	try {
-		const { rows } = params ? await db.execute(sql, params) : await db.execute(sql)
-		return { rows: rows as T[], success: true, err: null }
+		const { rows } = args ? await db.execute(sql, args) : await db.execute(sql)
+		return { rows: rows as T[], err: null }
 	} catch (err) {
-		// This will always be a LibsqlError
 		const libsql_error = err as LibsqlError
 		console.error(libsql_error.message)
-		return { rows: null, err: libsql_error, success: false }
+		return { rows: null, err: libsql_error }
 	}
 }

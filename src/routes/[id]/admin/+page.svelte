@@ -54,12 +54,9 @@
 						{#if show_password}
 							{form.password}
 						{:else}
-							<button
-								class="small"
-								onclick={() => {
-									show_password = true
-								}}>Reveal</button
-							>
+							<button class="small" onclick={() => (show_password = true)}>
+								Reveal
+							</button>
 						{/if}
 					</span>
 				</li>
@@ -101,12 +98,7 @@
 					<button type="submit">Yes, delete short URL</button>
 					<p>Are you sure? This action cannot be undone.</p>
 				{:else}
-					<button
-						type="button"
-						onclick={() => {
-							deletion_confirmed = true
-						}}
-					>
+					<button type="button" onclick={() => (deletion_confirmed = true)}>
 						Delete short URL
 					</button>
 				{/if}

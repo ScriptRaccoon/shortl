@@ -4,12 +4,11 @@
 
 	let { form } = $props()
 
-	const code = page.url.searchParams.get('code')
-
 	let copied = $state(false)
 
 	async function copy_url() {
-		await navigator.clipboard.writeText(form?.short_url ?? '')
+		if (!form?.short_url) return
+		await navigator.clipboard.writeText(form.short_url)
 		copied = true
 		setTimeout(() => {
 			copied = false
@@ -17,19 +16,11 @@
 	}
 </script>
 
-<svelte:head>
-	<title>ShortL - URL Shortener</title>
-	<meta
-		name="description"
-		content="ShortL is a simple URL shortener that allows you to create short links for your long URLs."
-	/>
-</svelte:head>
-
 <header>
 	<h1>ShortL</h1>
 </header>
 
-{#if code === 'delete' && !form}
+{#if page.url.searchParams.get('code') === 'delete' && !form}
 	<p>The short URL has been deleted.</p>
 {/if}
 
@@ -61,7 +52,7 @@
 		<section>
 			<h2>Short URL has been generated</h2>
 
-			<p class="accent">
+			<p class="short_url">
 				<code>{form?.short_url}</code>
 			</p>
 
@@ -96,5 +87,9 @@
 <style>
 	.password {
 		font-weight: bold;
+	}
+
+	.short_url {
+		color: orangered;
 	}
 </style>

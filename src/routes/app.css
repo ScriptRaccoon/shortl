@@ -71,20 +71,9 @@ section {
 	margin-bottom: 2.5rem;
 }
 
-.accent {
-	color: orangered;
-}
-
 .error {
 	color: red;
 	font-weight: 500;
-}
-
-.wrapper {
-	max-width: 38rem;
-	margin: 0 auto;
-	padding-inline: 1rem;
-	padding-bottom: 2rem;
 }
 
 button,
