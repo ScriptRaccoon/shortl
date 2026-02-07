@@ -89,10 +89,10 @@ input {
 	padding: 0.25rem;
 	border: 1px solid black;
 	width: 100%;
-}
 
-input:focus-visible {
-	outline: 1px solid black;
+	&:focus-visible {
+		outline: 1px solid black;
+	}
 }
 
 button {
@@ -102,27 +102,31 @@ button {
 	font-size: 1rem;
 	font-weight: 500;
 	cursor: pointer;
+
+	&:active {
+		transform: translate(1px, 1px);
+	}
+
+	&.small {
+		padding: 0rem 0.5rem;
+	}
+
+	&.fullwidth {
+		margin-top: 0.5rem;
+	}
+
+	@media (max-width: 600px) {
+		&.fullwidth {
+			width: 100%;
+		}
+	}
 }
 
-button:active {
-	transform: translate(1px, 1px);
-}
-
-button:focus-visible {
+:is(a, button):focus-visible {
 	outline: 2px solid black;
 	outline-offset: 2px;
 }
 
-button.fullwidth {
-	margin-top: 0.5rem;
-}
-
-@media (max-width: 600px) {
-	button.fullwidth {
-		width: 100%;
-	}
-}
-
-button.small {
-	padding: 0rem 0.5rem;
+.lucide {
+	vertical-align: text-bottom;
 }

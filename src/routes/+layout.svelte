@@ -1,7 +1,6 @@
 <script lang="ts">
+	import Nav from '$lib/components/Nav.svelte'
 	import './app.css'
-	import Fa from 'svelte-fa'
-	import { faHome } from '@fortawesome/free-solid-svg-icons'
 
 	let { children } = $props()
 </script>
@@ -15,11 +14,7 @@
 </svelte:head>
 
 <div class="container">
-	<nav>
-		<a href="/" aria-label="home">
-			<Fa icon={faHome} />
-		</a>
-	</nav>
+	<Nav />
 
 	{@render children()}
 </div>
@@ -30,17 +25,5 @@
 		margin: 0 auto;
 		padding-inline: 1rem;
 		padding-bottom: 2rem;
-	}
-
-	nav {
-		display: flex;
-		justify-content: end;
-		margin-bottom: -1rem;
-		font-size: 1rem;
-		padding-top: 0.25rem;
-	}
-
-	a {
-		color: black;
 	}
 </style>
