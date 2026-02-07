@@ -8,6 +8,13 @@
 
 	let sending_password = $state(false)
 	let sending_delete = $state(false)
+
+	function confirm_deletion() {
+		deletion_confirmed = true
+		setTimeout(() => {
+			deletion_confirmed = false
+		}, 5000)
+	}
 </script>
 
 <svelte:head>
@@ -128,7 +135,7 @@
 					<button type="submit">Yes, delete short URL</button>
 					<p>Are you sure? This action cannot be undone.</p>
 				{:else}
-					<button type="button" onclick={() => (deletion_confirmed = true)}>
+					<button type="button" onclick={confirm_deletion}>
 						Delete short URL
 					</button>
 				{/if}
