@@ -12,10 +12,6 @@
 	nav {
 		display: flex;
 		justify-content: end;
-		padding-top: 1rem;
-	}
-
-	a {
-		color: inherit;
+		margin-top: 1rem;
 	}
 </style>

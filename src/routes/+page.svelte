@@ -87,7 +87,9 @@
 				URL when it is no longer needed, open
 			</p>
 			<p>
-				<a href={form.short_url_admin}><code>{form.short_url_admin}</code></a>
+				<a class="admin-link" href={form.short_url_admin}
+					><code>{form.short_url_admin}</code></a
+				>
 			</p>
 			<p>and use the following password:</p>
 			<p>
@@ -105,5 +107,9 @@
 
 	.short_url {
 		color: orangered;
+	}
+
+	.admin-link {
+		color: royalblue;
 	}
 </style>
