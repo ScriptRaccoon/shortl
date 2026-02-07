@@ -20,6 +20,17 @@ export const actions: Actions = {
 
 		if (!is_valid_url) return fail(400, { url, error: 'URL is not valid' })
 
+		const sql_banned = `
+			SELECT 1 FROM banned_domains
+			WHERE ? like '%' || domain || '%'
+			LIMIT 1`
+
+		const { rows, err: err_banned } = await query(sql_banned, [url])
+
+		if (err_banned) return fail(500, { url, error: 'Database error' })
+
+		if (rows.length) return fail(403, { url, error: 'URL is not allowed' })
+
 		const id = generate_id()
 		const password = generate_password()
 		const password_hash = await bcrypt.hash(password, 10)

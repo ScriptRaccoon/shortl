@@ -13,3 +13,10 @@ CREATE TABLE IF NOT EXISTS visits (
     country TEXT,
     FOREIGN KEY (shortcut_id) REFERENCES shortcuts (id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS banned_domains (
+    id INTEGER NOT NULL PRIMARY KEY,
+    domain TEXT NOT NULL UNIQUE,
+    reason TEXT,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
