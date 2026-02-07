@@ -4,8 +4,8 @@ This is a URL shortner made with SvelteKit and SQLite (hosted on Turso).
 
 <https://sshortl.netlify.app>
 
-<img width="400" alt="shortl example" src="https://github.com/user-attachments/assets/93d873ee-7741-4d41-bd2d-dd8ed0ea3c78" /><br />
+<br /><img width="400" alt="shortl example" src="https://github.com/user-attachments/assets/9c6c2147-7270-4306-a6ac-4476c98407e8" /><br />
 
 After creation of a short URL, a password-protected admin page is created where the visits can be evaluated. Also, the short URL can be deleted from there again.
 
-<img width="400" alt="admin page" src="https://github.com/user-attachments/assets/4fb7e06f-3f8a-451d-a65a-7d02c7c162eb" />
+<img width="500" alt="admin page" src="https://github.com/user-attachments/assets/3e11f169-4bcf-413a-b919-e0d33d10f4ea" />
