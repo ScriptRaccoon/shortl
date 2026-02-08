@@ -5,17 +5,9 @@
 	let { form } = $props()
 
 	let deletion_confirmed = $state(false)
-	let show_password = $state(false)
 
 	let sending_password = $state(false)
 	let sending_delete = $state(false)
-
-	function confirm_deletion() {
-		deletion_confirmed = true
-		setTimeout(() => {
-			deletion_confirmed = false
-		}, 5000)
-	}
 
 	let shortcut = $state<null | ShortCut>(null)
 
@@ -79,17 +71,6 @@
 				<li>
 					Number of visits: <span class="value">{shortcut.visits.length}</span>
 				</li>
-				<li>
-					Password: <span class="value">
-						{#if show_password}
-							{shortcut.password}
-						{:else}
-							<button class="small" onclick={() => (show_password = true)}>
-								Reveal
-							</button>
-						{/if}
-					</span>
-				</li>
 			</ul>
 		</section>
 
@@ -137,14 +118,22 @@
 				}}
 			>
 				{#if deletion_confirmed}
-					<button type="submit">Yes, delete short URL</button>
-					<p>Are you sure? This action cannot be undone.</p>
+					<p>Input the password to confirm</p>
+					<input
+						type="password"
+						name="password"
+						id="password"
+						aria-label="Password"
+						required
+					/>
+					<p>
+						<button type="submit">Delete short URL</button>
+					</p>
 				{:else}
-					<button type="button" onclick={confirm_deletion}>
+					<button type="button" onclick={() => (deletion_confirmed = true)}>
 						Delete short URL
 					</button>
 				{/if}
-				<input type="hidden" name="password" value={shortcut.password} />
 			</form>
 
 			{#if sending_delete}
