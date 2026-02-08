@@ -20,6 +20,10 @@ export async function query<T = any>(sql: string, args?: Record<string, any>) {
 	}
 }
 
+export function is_constraint_error(err: LibsqlError) {
+	return err.code.startsWith('SQLITE_CONSTRAINT')
+}
+
 /**
  * Utility to simulate delay for db operations
  */

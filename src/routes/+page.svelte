@@ -28,12 +28,25 @@
 						id="url"
 						required
 						value={form?.url ?? 'https://'}
-						disabled={!!form?.id}
+						disabled={form?.success}
 					/>
 				</div>
 
 				<details>
 					<summary>More settings</summary>
+
+					<div class="form-group">
+						<label for="id">
+							ID (optional, will be generated automatically)
+						</label>
+						<input
+							type="text"
+							name="id"
+							id="id"
+							value={form?.id ?? ''}
+							disabled={form?.success}
+						/>
+					</div>
 
 					<div class="form-group">
 						<label for="expires_at">Expiration Date (optional)</label>
@@ -42,27 +55,27 @@
 							name="expires_at"
 							id="expires_at"
 							value={form?.expires_at ?? ''}
-							disabled={!!form?.id}
+							disabled={form?.success}
 						/>
 					</div>
 				</details>
 
-				{#if !form?.id}
+				{#if !form?.success}
 					<button type="submit" disabled={sending}>Shorten</button>
 				{/if}
 			{/snippet}
 		</FormWrapper>
 	</section>
 
-	{#if form?.id}
+	{#if form?.success}
 		<section>
 			<h2>Short URL has been generated</h2>
 
 			<p class="accent">
-				<code>{form?.short_url}</code>
+				<code>{form.short_url}</code>
 			</p>
 
-			<CopyBtn content={form?.short_url} label="Copy URL" />
+			<CopyBtn content={form.short_url} label="Copy URL" />
 		</section>
 
 		<section>
