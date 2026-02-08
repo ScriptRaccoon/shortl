@@ -3,6 +3,17 @@
 	import type { Snippet } from 'svelte'
 
 	let sending = $state(false)
+	let show_please_wait = $state(false)
+
+	$effect(() => {
+		if (sending) {
+			setTimeout(() => {
+				show_please_wait = sending
+			}, 200)
+		} else {
+			show_please_wait = false
+		}
+	})
 
 	type Props = {
 		error?: string
@@ -27,7 +38,7 @@
 	{@render children(sending)}
 </form>
 
-{#if sending}
+{#if show_please_wait}
 	<p>Please wait ...</p>
 {/if}
 
