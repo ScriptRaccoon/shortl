@@ -9,10 +9,12 @@
 		ID: <span class="value">{shortcut.id}</span>
 	</li>
 	<li>
-		URL: <span class="value">{shortcut.url}</span>
+		URL: <a class="value" href={shortcut.url} target="_blank">{shortcut.url}</a>
 	</li>
 	<li>
-		Short URL: <span class="value">{shortcut.short_url}</span>
+		Short URL: <a class="value" href={shortcut.short_url} target="_blank">
+			{shortcut.short_url}
+		</a>
 	</li>
 	<li>
 		Created at: <span class="value">
