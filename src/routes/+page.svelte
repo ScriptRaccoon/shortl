@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { enhance } from '$app/forms'
 	import { page } from '$app/state'
 	import CopyBtn from '$lib/components/CopyBtn.svelte'
+	import FormWrapper from '$lib/components/FormWrapper.svelte'
 
 	let { form } = $props()
-
-	let sending = $state(false)
 </script>
 
 <header>
@@ -19,55 +17,41 @@
 <main>
 	<section>
 		<h2>Create a short URL</h2>
-		<form
-			method="POST"
-			use:enhance={() => {
-				sending = true
-				return async ({ update }) => {
-					await update()
-					sending = false
-				}
-			}}
-		>
-			<div class="form-group">
-				<label for="url">URL</label>
-				<input
-					type="url"
-					name="url"
-					id="url"
-					required
-					value={form?.url ?? 'https://'}
-					disabled={!!form?.id}
-				/>
-			</div>
 
-			<details>
-				<summary>More settings</summary>
-
+		<FormWrapper error={form?.error}>
+			{#snippet children(sending)}
 				<div class="form-group">
-					<label for="expires_at">Expiration Date (optional)</label>
+					<label for="url">URL</label>
 					<input
-						type="date"
-						name="expires_at"
-						id="expires_at"
-						value={form?.expires_at ?? ''}
+						type="url"
+						name="url"
+						id="url"
+						required
+						value={form?.url ?? 'https://'}
 						disabled={!!form?.id}
 					/>
 				</div>
-			</details>
 
-			{#if !form?.id}
-				<button type="submit">Shorten</button>
-			{/if}
-		</form>
+				<details>
+					<summary>More settings</summary>
 
-		{#if sending}
-			<p>Please wait ...</p>
-		{/if}
+					<div class="form-group">
+						<label for="expires_at">Expiration Date (optional)</label>
+						<input
+							type="date"
+							name="expires_at"
+							id="expires_at"
+							value={form?.expires_at ?? ''}
+							disabled={!!form?.id}
+						/>
+					</div>
+				</details>
 
-		{#if !sending && form?.error}
-			<p class="error">{form.error}</p>
-		{/if}
+				{#if !form?.id}
+					<button type="submit" disabled={sending}>Shorten</button>
+				{/if}
+			{/snippet}
+		</FormWrapper>
 	</section>
 
 	{#if form?.id}

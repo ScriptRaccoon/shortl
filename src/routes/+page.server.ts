@@ -17,7 +17,7 @@ const url_schema = z
 		required_error: 'URL is required'
 	})
 	.url({ message: 'URL is invalid' })
-	.max(1000, { message: 'URL can be at most 1000 characters long' })
+	.max(1000, { message: 'URL must be at most 1000 characters long' })
 
 const date_schema = z
 	.string({ message: 'Date must be a string' })

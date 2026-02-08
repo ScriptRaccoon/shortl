@@ -19,3 +19,8 @@ export async function query<T = any>(sql: string, args?: Record<string, any>) {
 		return { rows: null, err: libsql_error }
 	}
 }
+
+/**
+ * Utility to simulate delay for db operations
+ */
+export const sleep = (delay: number) => new Promise<void>((res) => setTimeout(res, delay))

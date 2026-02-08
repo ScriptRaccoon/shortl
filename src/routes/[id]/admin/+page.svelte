@@ -1,13 +1,10 @@
 <script lang="ts">
-	import { enhance } from '$app/forms'
+	import FormWrapper from '$lib/components/FormWrapper.svelte'
 	import type { ShortCut } from '$lib/types'
 
 	let { form } = $props()
 
 	let deletion_confirmed = $state(false)
-
-	let sending_password = $state(false)
-	let sending_delete = $state(false)
 
 	let shortcut = $state<null | ShortCut>(null)
 
@@ -25,31 +22,15 @@
 		<section>
 			<h2>Login</h2>
 
-			<form
-				method="POST"
-				action="?/login"
-				use:enhance={() => {
-					sending_password = true
-					return async ({ update }) => {
-						await update()
-						sending_password = false
-					}
-				}}
-			>
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" name="password" id="password" required />
-				</div>
-				<button type="submit">Login</button>
-			</form>
-
-			{#if sending_password}
-				<p>Please wait ...</p>
-			{/if}
-
-			{#if !sending_password && form?.error}
-				<p class="error">{form.error}</p>
-			{/if}
+			<FormWrapper error={form?.error} action="?/login">
+				{#snippet children(sending)}
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input type="password" name="password" id="password" required />
+					</div>
+					<button type="submit" disabled={sending}>Login</button>
+				{/snippet}
+			</FormWrapper>
 		</section>
 	{:else}
 		<section>
@@ -115,43 +96,27 @@
 		<section>
 			<h2>Danger Zone</h2>
 
-			<form
-				action="?/delete"
-				method="POST"
-				use:enhance={() => {
-					sending_delete = true
-					return async ({ update }) => {
-						await update()
-						sending_delete = false
-					}
-				}}
-			>
-				{#if deletion_confirmed}
-					<div class="form-group">
-						<label for="password">Enter the password to confirm</label>
-						<input
-							type="password"
-							name="password"
-							id="password"
-							aria-label="Password"
-							required
-						/>
-					</div>
-					<button type="submit">Delete short URL</button>
-				{:else}
-					<button type="button" onclick={() => (deletion_confirmed = true)}>
-						Delete short URL
-					</button>
-				{/if}
-			</form>
-
-			{#if sending_delete}
-				<p>Please wait ...</p>
-			{/if}
-
-			{#if !sending_delete && form?.error}
-				<p class="error">{form.error}</p>
-			{/if}
+			<FormWrapper error={form?.error} action="?/delete">
+				{#snippet children(sending)}
+					{#if deletion_confirmed}
+						<div class="form-group">
+							<label for="password">Enter the password to confirm</label>
+							<input
+								type="password"
+								name="password"
+								id="password"
+								aria-label="Password"
+								required
+							/>
+						</div>
+						<button type="submit" disabled={sending}>Delete short URL</button>
+					{:else}
+						<button type="button" onclick={() => (deletion_confirmed = true)}>
+							Delete short URL
+						</button>
+					{/if}
+				{/snippet}
+			</FormWrapper>
 		</section>
 	{/if}
 </main>

@@ -135,11 +135,18 @@ button {
 	padding: 0.25rem 0.75rem;
 	font-size: 1rem;
 	font-weight: 500;
-	cursor: pointer;
 	transition: transform 120ms;
 
-	&:active {
+	&:not(:disabled) {
+		cursor: pointer;
+	}
+
+	&:not(:disabled):active {
 		transform: translate(1px, 1px);
+	}
+
+	&:disabled {
+		opacity: 0.75;
 	}
 
 	@media (max-width: 600px) {
