@@ -10,4 +10,4 @@ After creation of a short URL, a password-protected admin page is created where 
 
 <img width="500" alt="admin page" src="https://github.com/user-attachments/assets/3e11f169-4bcf-413a-b919-e0d33d10f4ea" />
 
-When a new short URL is created, an optional expiration date can be set by the user. In any csase, inactive short URLs are deleted automatically after one year.
+When a new short URL is created, an optional expiration date can be set by the user. In any case, inactive short URLs are deleted automatically after one year.
