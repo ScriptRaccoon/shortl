@@ -36,9 +36,11 @@
 					}
 				}}
 			>
-				<label for="password">Password</label>
-				<input type="password" name="password" id="password" required />
-				<button class="fullwidth" type="submit">Login</button>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" required />
+				</div>
+				<button type="submit">Login</button>
 			</form>
 
 			{#if sending_password}
@@ -118,17 +120,17 @@
 				}}
 			>
 				{#if deletion_confirmed}
-					<p>Input the password to confirm</p>
-					<input
-						type="password"
-						name="password"
-						id="password"
-						aria-label="Password"
-						required
-					/>
-					<p>
-						<button type="submit">Delete short URL</button>
-					</p>
+					<div class="form-group">
+						<label for="password">Enter the password to confirm</label>
+						<input
+							type="password"
+							name="password"
+							id="password"
+							aria-label="Password"
+							required
+						/>
+					</div>
+					<button type="submit">Delete short URL</button>
 				{:else}
 					<button type="button" onclick={() => (deletion_confirmed = true)}>
 						Delete short URL

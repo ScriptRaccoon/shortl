@@ -1,14 +1,10 @@
+/* FONTS & COLORS */
+
 @font-face {
 	font-family: 'Space Mono';
 	src: url('/fonts/Space_Mono/SpaceMono-Bold.woff2') format('woff2');
 	font-weight: bold;
 	font-style: normal;
-}
-
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
 }
 
 :root {
@@ -35,6 +31,28 @@
 	}
 }
 
+/* RESETS */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+	color: inherit;
+}
+
+button,
+input {
+	font: inherit;
+	color: inherit;
+	background: none;
+	border: none;
+}
+
+/* GLOBAL STUFF */
+
 body {
 	font-family:
 		system-ui,
@@ -54,6 +72,8 @@ body {
 	color: var(--font-color);
 }
 
+/* ELEMENTS */
+
 h1,
 h2 {
 	font-family: 'Space Mono', monospace;
@@ -69,10 +89,6 @@ h2 {
 	margin-bottom: 0.5rem;
 }
 
-a {
-	color: inherit;
-}
-
 p {
 	margin-block: 0.75rem;
 }
@@ -82,31 +98,11 @@ ul {
 	margin-block: 0.75rem;
 }
 
-label {
-	display: block;
-}
-
 section {
 	margin-bottom: 2.5rem;
 }
 
-.error {
-	color: var(--error-color);
-	font-weight: 500;
-}
-
-.accent {
-	color: var(--accent-color);
-}
-
-button,
-input {
-	font: inherit;
-	color: inherit;
-	background: none;
-	border: none;
-	outline: none;
-}
+/* INTERACTIVE ELEMENTS */
 
 input {
 	padding: 0.25rem;
@@ -118,10 +114,15 @@ input {
 	}
 }
 
+label {
+	display: block;
+	font-size: 1rem;
+}
+
 button {
 	background: var(--button-bg-color);
 	color: var(--button-font-color);
-	padding: 0.25rem 0.5rem;
+	padding: 0.25rem 0.75rem;
 	font-size: 1rem;
 	font-weight: 500;
 	cursor: pointer;
@@ -131,17 +132,10 @@ button {
 		transform: translate(1px, 1px);
 	}
 
-	&.small {
-		padding: 0rem 0.5rem;
-	}
-
-	&.fullwidth {
-		margin-top: 0.5rem;
-	}
-
 	@media (max-width: 600px) {
-		&.fullwidth {
+		&[type='submit'] {
 			width: 100%;
+			padding: 0.4rem 0.75rem;
 		}
 	}
 }
@@ -149,6 +143,21 @@ button {
 :is(a, button):focus-visible {
 	outline: 2px solid var(--outline-color);
 	outline-offset: 2px;
+}
+
+/* UTILITIES */
+
+.form-group {
+	margin-bottom: 0.75rem;
+}
+
+.error {
+	color: var(--error-color);
+	font-weight: 500;
+}
+
+.accent {
+	color: var(--accent-color);
 }
 
 .lucide {

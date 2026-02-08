@@ -29,17 +29,20 @@
 				}
 			}}
 		>
-			<label for="url">URL</label>
-			<input
-				type="url"
-				name="url"
-				id="url"
-				required
-				value={form?.url ?? 'https://'}
-				disabled={!!form?.id}
-			/>
+			<div class="form-group">
+				<label for="url">URL</label>
+				<input
+					type="url"
+					name="url"
+					id="url"
+					required
+					value={form?.url ?? 'https://'}
+					disabled={!!form?.id}
+				/>
+			</div>
+
 			{#if !form?.id}
-				<button class="fullwidth" type="submit">Shorten</button>
+				<button type="submit">Shorten</button>
 			{/if}
 		</form>
 
