@@ -16,6 +16,7 @@ const url_schema = z
 		invalid_type_error: 'URL must be a string',
 		required_error: 'URL is required'
 	})
+	.regex(/^https?:\/\//, { message: 'URL must start with http:// or https://' })
 	.url({ message: 'URL is invalid' })
 	.max(1000, { message: 'URL must be at most 1000 characters long' })
 
