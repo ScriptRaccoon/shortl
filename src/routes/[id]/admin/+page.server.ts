@@ -2,7 +2,7 @@ import { fail, redirect } from '@sveltejs/kit'
 import type { Actions } from './$types'
 import { query } from '$lib/server/db'
 import bcrypt from 'bcryptjs'
-import type { ShortCut } from '$lib/types'
+import type { Shortcut } from '$lib/types'
 
 export const actions: Actions = {
 	login: async (event) => {
@@ -49,7 +49,7 @@ export const actions: Actions = {
 
 		const short_url = `${event.url.origin}/${id}`
 
-		const shortcut: ShortCut = { id, url, short_url, expires_at, created_at, visits }
+		const shortcut: Shortcut = { id, url, short_url, expires_at, created_at, visits }
 
 		return { shortcut }
 	},

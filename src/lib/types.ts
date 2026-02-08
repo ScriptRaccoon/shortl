@@ -1,4 +1,4 @@
-export type ShortCut = {
+export type Shortcut = {
 	id: string
 	url: string
 	short_url: string
