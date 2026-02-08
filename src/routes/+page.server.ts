@@ -11,14 +11,23 @@ const alphabetnums = `${alphabet}0123456789`
 const generate_id = customAlphabet(alphabet, 6)
 const generate_password = customAlphabet(alphabetnums, 16)
 
+const url_schema = z
+	.string({
+		invalid_type_error: 'URL must be a string',
+		required_error: 'URL is required'
+	})
+	.url({ message: 'URL is invalid' })
+	.max(1000, { message: 'URL can be at most 1000 characters long' })
+
 export const actions: Actions = {
 	default: async (event) => {
 		const form = await event.request.formData()
 		const url = form.get('url') as string
 
-		const is_valid_url = z.string().url().safeParse(url).success
-
-		if (!is_valid_url) return fail(400, { url, error: 'URL is not valid' })
+		const parsed_url = url_schema.safeParse(url)
+		if (!parsed_url.success) {
+			return fail(400, { url, error: parsed_url.error.issues[0].message })
+		}
 
 		const sql_banned = `
 			SELECT 1 FROM banned_domains
