@@ -3,9 +3,6 @@
 </script>
 
 <nav>
-	<a href="/" aria-label="home">
-		<House />
-	</a>
 	<a
 		href="https://github.com/ScriptRaccoon/shortl"
 		aria-label="GitHub repository"
@@ -13,12 +10,14 @@
 	>
 		<Github />
 	</a>
+	<a href="/" aria-label="home">
+		<House />
+	</a>
 </nav>
 
 <style>
 	nav {
 		display: flex;
-		flex-direction: row-reverse;
 		justify-content: end;
 		margin-top: 1rem;
 		gap: 0.5rem;
