@@ -34,11 +34,11 @@
 		]
 	},
 	"dependencies": {
-		"@libsql/client": "^0.15.4",
+		"@libsql/client": "^0.17.0",
 		"@netlify/functions": "^5.1.2",
-		"bcryptjs": "^3.0.2",
+		"bcryptjs": "^3.0.3",
 		"lucide-svelte": "^0.563.0",
-		"nanoid": "^5.1.5",
+		"nanoid": "^5.1.6",
 		"zod": "^4.3.6"
 	}
 }
