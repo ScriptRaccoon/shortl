@@ -9,4 +9,9 @@ WHERE
         WHERE
             v.shortcut_id = s.id
             AND v.date > datetime ('now', '-1 year')
-    )
+    );
+
+DELETE FROM shortcuts
+WHERE
+    expires_at IS NOT NULL
+    AND expires_at <= CURRENT_TIMESTAMP;

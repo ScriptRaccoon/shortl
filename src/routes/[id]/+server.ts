@@ -8,19 +8,22 @@ export const GET: RequestHandler = async (event) => {
 	const referer = event.request.headers.get('referer') || 'direct'
 	const country = event.request.headers.get('x-country')
 
-	const sql_url = 'SELECT url FROM shortcuts WHERE id = ?'
-
-	const sql_visit = `
-		INSERT INTO visits (shortcut_id, referer, country)
-		VALUES (?, ?, ?)`
+	const sql_url = `
+		SELECT url
+		FROM shortcuts
+		WHERE id = ? AND (expires_at IS NULL OR expires_at > CURRENT_TIMESTAMP)`
 
 	const { err, rows } = await query<{ url: string }>(sql_url, [id])
 
 	if (err) error(500, 'Database error')
 
-	if (!rows.length) error(404, 'Short URL not found')
+	if (!rows.length) error(404, 'Not Found')
 
 	const { url } = rows[0]
+
+	const sql_visit = `
+		INSERT INTO visits (shortcut_id, referer, country)
+		VALUES (?, ?, ?)`
 
 	await query(sql_visit, [id, referer, country])
 

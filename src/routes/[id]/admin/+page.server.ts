@@ -13,20 +13,22 @@ export const actions: Actions = {
 		if (!password) return fail(400, { error: 'Password is required' })
 
 		const sql_shortcut = `
-			SELECT url, created_at, password_hash
+			SELECT url, created_at, expires_at, password_hash
 			FROM shortcuts
-			WHERE id = ?`
+			WHERE id = ?
+			AND (expires_at IS NULL OR expires_at > CURRENT_TIMESTAMP)`
 
 		const { rows: shortcuts, err: err_shortcut } = await query<{
 			url: string
 			created_at: string
+			expires_at: string | null
 			password_hash: string
 		}>(sql_shortcut, [id])
 
 		if (err_shortcut) return fail(500, { error: 'Database error' })
 		if (!shortcuts.length) return fail(401, { error: 'Invalid credentials' })
 
-		const { url, created_at, password_hash } = shortcuts[0]
+		const { url, created_at, expires_at, password_hash } = shortcuts[0]
 
 		const password_is_correct = await bcrypt.compare(password, password_hash)
 		if (!password_is_correct) return fail(401, { error: 'Invalid credentials' })
@@ -47,7 +49,7 @@ export const actions: Actions = {
 
 		const short_url = `${event.url.origin}/${id}`
 
-		const shortcut: ShortCut = { id, url, short_url, created_at, visits }
+		const shortcut: ShortCut = { id, url, short_url, expires_at, created_at, visits }
 
 		return { shortcut }
 	},

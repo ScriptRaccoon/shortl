@@ -41,6 +41,21 @@
 				/>
 			</div>
 
+			<details>
+				<summary>More settings</summary>
+
+				<div class="form-group">
+					<label for="expires_at">Expiration Date (optional)</label>
+					<input
+						type="date"
+						name="expires_at"
+						id="expires_at"
+						value={form?.expires_at ?? ''}
+						disabled={!!form?.id}
+					/>
+				</div>
+			</details>
+
 			{#if !form?.id}
 				<button type="submit">Shorten</button>
 			{/if}
@@ -97,5 +112,13 @@
 
 	code {
 		word-break: break-all;
+	}
+
+	details[open] summary {
+		margin-bottom: 0.5rem;
+	}
+
+	details {
+		margin-bottom: 1.5rem;
 	}
 </style>

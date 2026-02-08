@@ -22,13 +22,14 @@ export default async () => {
 	})
 
 	try {
-		await cleanup_shortcuts(db)
+		await remove_expired_shortcuts(db)
+		await remove_inactive_shortcuts(db)
 	} catch (err) {
 		console.error(err)
 	}
 }
 
-async function cleanup_shortcuts(db: Client) {
+async function remove_inactive_shortcuts(db: Client) {
 	const sql = `
         DELETE FROM shortcuts AS s
         WHERE s.created_at <= datetime('now', '-1 year')
@@ -41,4 +42,14 @@ async function cleanup_shortcuts(db: Client) {
 
 	const res = await db.execute(sql)
 	console.info(`Deleted ${res.rowsAffected} inactive shortcuts`)
+}
+
+async function remove_expired_shortcuts(db: Client) {
+	const sql = `
+    	DELETE FROM shortcuts
+		WHERE expires_at IS NOT NULL
+		AND expires_at <= CURRENT_TIMESTAMP`
+
+	const res = await db.execute(sql)
+	console.info(`Deleted ${res.rowsAffected} expired shortcuts`)
 }

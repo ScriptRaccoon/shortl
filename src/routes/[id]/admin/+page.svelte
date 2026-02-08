@@ -70,6 +70,13 @@
 						{new Date(shortcut.created_at).toLocaleString()}
 					</span>
 				</li>
+				{#if shortcut.expires_at}
+					<li>
+						Expires at: <span class="value">
+							{new Date(shortcut.expires_at).toLocaleDateString()}
+						</span>
+					</li>
+				{/if}
 				<li>
 					Number of visits: <span class="value">{shortcut.visits.length}</span>
 				</li>

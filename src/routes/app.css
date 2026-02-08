@@ -102,6 +102,12 @@ section {
 	margin-bottom: 2.5rem;
 }
 
+summary {
+	cursor: pointer;
+	width: fit-content;
+	font-size: 1rem;
+}
+
 /* INTERACTIVE ELEMENTS */
 
 input {
@@ -140,7 +146,7 @@ button {
 	}
 }
 
-:is(a, button):focus-visible {
+:is(a, button, summary):focus-visible {
 	outline: 2px solid var(--outline-color);
 	outline-offset: 2px;
 }

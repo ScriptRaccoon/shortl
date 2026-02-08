@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS shortcuts (
     id TEXT NOT NULL PRIMARY KEY,
     url TEXT NOT NULL,
     password_hash TEXT NOT NULL,
+    expires_at TEXT,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
