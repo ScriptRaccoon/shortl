@@ -153,6 +153,7 @@
 	.value {
 		font-weight: 500;
 		color: var(--accent-color);
+		word-break: break-all;
 	}
 
 	table {
